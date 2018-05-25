@@ -15,8 +15,8 @@ typedef struct cmdFile {
 	int argc;
 	int inStage; /*-1 if not set*/
 	int outStage; /*-1 if not set*/
-	int inFd; /*-1 if not set*/
-	int outFd; /*-1 if not set*/
+	int inName; /*NULL if not set*/
+	int outName; /*NULL if not set*/
 } cmdFile;
 
 typedef struct fileSet {
@@ -50,13 +50,8 @@ fileSet *makeFileSet(input *in);
 
 /********************* CmdFile *********************/
 
-/*sets a cmdFile to given values*/
-void setCmdFileBase(cmdFile *cf, char *name, int stage, 
-				 	char **args, int argc);
-
-/*sets a cmdFiles in and out pipe info*/
-void setCmdFileIO(cmdFile *cf, int inStage, int outStage,
-				  	int inFd, int outFd);
+/*inits a cmdFile to base values*/
+void initCmdFile(cmdFile *cf);
 
 /********************* Funcs *********************/
 

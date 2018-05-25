@@ -114,8 +114,7 @@ fileSet *initFileSet() {
 	fs->size = 0;
 
 	for (i = 0; i < MAX_CMD_PIPES; i++) {
-		setCmdFileBase(fs->files + i, NULL, -1, NULL, 0);
-		setCmdFileIO(fs->files + i, -1, -1, -1, -1);
+		initCmdFile(fs->files + i);
 	}
 
 	return fs;
@@ -125,9 +124,10 @@ fileSet *initFileSet() {
 fileSet *makeFileSet(input *in) {
 	fileSet *fs = initFileSet();
 	int i;
+	int curCmd = 0;
+	cmdFile *cf;
 
 	for (i = 0; i < in->size; i++) {
-		/*TODO: fill in each files data */
 		switch (in->words[i][0]) {
 			case '|':
 				break;
@@ -136,7 +136,13 @@ fileSet *makeFileSet(input *in) {
 			case '<':
 				break;
 			default:
-				break;
+				if (!(fs->files[curCmd].name)) { /*if file isnt initialized*/
+					cf = fs->files + curCmd;
+					cf->name = in->words[i];
+					cf->stage = curCmd;
+				} else { /*if file is initialized, add args*/
+					cf->args[cf->argc++] = in->words[i]
+				}
 		}
 	}
 
@@ -145,29 +151,22 @@ fileSet *makeFileSet(input *in) {
 
 /********************* CmdFile *********************/
 
-/*sets a cmdFile to given values*/
-void setCmdFileBase(cmdFile *cf, char *name, int stage, 
-				 	char **args, int argc) {
+/*inits a cmdFile to base values*/
+void initCmdFile(cmdFile *cf) {
 	int i;
 
-	cf->name = name;
-	cf->stage = stage;
-	cf->argc = argc;
+	cf->name = NULL;
+	cf->stage = -1;
+	cf->argc = 0;
 
-	for (i = 0; i < argc; i++)
-		cf->args[i] = args[i];
+	for (i = 0; i < MAX_CMD_ARGS; i++)
+		cf->args[i] = 0;
+
+	cf->inStage = -1;
+	cf->outStage = -1;
+	cf->inName = NULL;
+	cf->outName = NULL;
 }
-
-/*sets a cmdFiles in and out pipe info*/
-void setCmdFileIO(cmdFile *cf, int inStage, int outStage,
-				  	int inFd, int outFd) {
-	cf->inStage = inStage;
-	cf->outStage = outStage;
-	cf->inFd = inFd;
-	cf->outFd = outFd;
-}
-
-/********************* Funcs *********************/
 
 /********************* Printing *********************/
 

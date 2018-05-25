@@ -44,7 +44,7 @@ int inputErrorCheck(input *in) {
 			} else {
 				curCmd = in->words[i];
 				cmdargs++;
-				
+
 				if (++pipelen > MAX_CMD_PIPES) { /*check if pipe too long*/
 					perror("pipeline too deep\n");
 					return 1;
@@ -208,11 +208,15 @@ void printStage(cmdFile *cf) {
 
 	if (cf->inStage != -1)
 		printf("input: pipe from stage %d\n", cf->inStage);
-	else 
+	else if (cf->inName)
+		printf("input: %s\n", cf->inName);
+	else
 		printf("input: original stdin\n");
 
 	if (cf->outStage != -1)
 		printf("output: pipe to stage %d\n", cf->outStage);
+	else if (cf->outName)
+		printf("output: %s\n", cf->outName);
 	else 
 		printf("output: original stdout\n");
 

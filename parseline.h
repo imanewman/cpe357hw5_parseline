@@ -10,20 +10,20 @@
 
 typedef struct cmdFile {
 	char *name;
-	int stage;
+	short stage;
 	char **start; /*used to print given args with in and out in right order*/
-	int startLen; /*count of args including in and outs*/
+	short startLen; /*count of args including in and outs*/
 	char *args[MAX_CMD_ARGS]; /*NULL if not set*/
-	int argc;
-	int inStage; /*-1 if not set*/
-	int outStage; /*-1 if not set*/
+	short argc;
+	short inStage; /*-1 if not set*/
+	short outStage; /*-1 if not set*/
 	char *inName; /*NULL if not set*/
 	char *outName; /*NULL if not set*/
 } cmdFile;
 
 typedef struct fileSet {
 	cmdFile files[MAX_CMD_PIPES];
-	int size;
+	short size;
 } fileSet;
 
 typedef struct input {

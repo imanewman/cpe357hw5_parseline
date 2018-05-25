@@ -15,8 +15,8 @@ typedef struct cmdFile {
 	int argc;
 	int inStage; /*-1 if not set*/
 	int outStage; /*-1 if not set*/
-	int inName; /*NULL if not set*/
-	int outName; /*NULL if not set*/
+	char *inName; /*NULL if not set*/
+	char *outName; /*NULL if not set*/
 } cmdFile;
 
 typedef struct fileSet {

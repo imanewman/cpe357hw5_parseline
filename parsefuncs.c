@@ -145,9 +145,9 @@ fileSet *makeFileSet(input *in) {
 					cf = fs->files + curCmd;
 					cf->name = in->words[i];
 					cf->stage = curCmd;
-				} else { /*if file is initialized, add args*/
-					cf->args[cf->argc++] = in->words[i];
 				}
+				
+				cf->args[cf->argc++] = in->words[i];
 		}
 	}
 

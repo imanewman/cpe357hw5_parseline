@@ -125,7 +125,7 @@ fileSet *makeFileSet(input *in) {
 	fileSet *fs = initFileSet();
 	int i;
 	int curCmd = 0;
-	cmdFile *cf;
+	cmdFile *cf = NULL;
 
 	for (i = 0; i < in->size; i++) {
 		switch (in->words[i][0]) {
@@ -136,7 +136,7 @@ fileSet *makeFileSet(input *in) {
 			case '<':
 				break;
 			default:
-				if (!(fs->files[curCmd].name)) { /*if file isnt initialized*/
+				if (!(cf)) { /*if file isnt initialized*/
 					cf = fs->files + curCmd;
 					cf->name = in->words[i];
 					cf->stage = curCmd;
@@ -186,6 +186,8 @@ void printStage(cmdFile *cf) {
 
 	for (i = 0; i < cf->argc; i++) 
 		printf("%s ", cf->args[i]);
+
+	/*add printing in and out reroute if exists?*/
 
 	printf("\"\n--------\ninput: ");
 

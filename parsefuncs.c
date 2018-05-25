@@ -187,7 +187,7 @@ void initCmdFile(cmdFile *cf) {
 /*prints the stages of the pipeline*/
 void printPipeline(fileSet *fs) {
 	int i;
-	
+
 	for (i = 0; i < fs->size; i++)
 		printStage(fs->files + i);
 }
@@ -203,17 +203,17 @@ void printStage(cmdFile *cf) {
 
 	/*add printing in and out reroute if exists?*/
 
-	printf("\"\n--------\ninput: ");
+	printf("\"\n--------\n");
 
 	if (cf->inStage != -1)
-		printf("pipe from stage %d\n", cf->inStage);
+		printf("input: pipe from stage %d\n", cf->inStage);
 	else 
-		printf("original stdin\n");
+		printf("input: original stdin\n");
 
 	if (cf->outStage != -1)
-		printf("pipe to stage %d\n", cf->outStage);
+		printf("output: pipe to stage %d\n", cf->outStage);
 	else 
-		printf("original stdout\n");
+		printf("output: original stdout\n");
 
 	printf("argc: %d\nargv: ", cf->argc);
 

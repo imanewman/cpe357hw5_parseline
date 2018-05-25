@@ -39,11 +39,12 @@ int inputErrorCheck(input *in) {
 		if (cmdargs == 0) { /*if new cmd*/
 			/*check if first arg is missing*/
 			if (in->words[i][0] == '|' || in->words[i][0] == '<' || in->words[i][0] == '>') {
-				perror("invalid null command\n");
+				perror("invalid null command\n"); 
 				return 1;
 			} else {
 				curCmd = in->words[i];
-
+				cmdargs++;
+				
 				if (++pipelen > MAX_CMD_PIPES) { /*check if pipe too long*/
 					perror("pipeline too deep\n");
 					return 1;

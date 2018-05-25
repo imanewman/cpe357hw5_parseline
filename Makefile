@@ -4,7 +4,7 @@ OBJS = parseline.o parsefuncs.o
 TOBJS = tests.o parseline.o parsefuncs.o
 DEPS = parseline.h
 NAME = parseline
-UNIX4 = tnewma03@unix4.csc.calpoly.edu:~/cpe357/hw5
+UNIX4 = tnewma03@unix4.csc.calpoly.edu
 all : $(NAME)
 
 $(NAME) : $(OBJS) $(DEPS)
@@ -35,10 +35,10 @@ ssh :
 	ssh $(UNIX4)
 
 scpf :
-	scp ./* $(UNIX4)
+	scp ./* $(UNIX4):~/cpe357/hw5
 
 scpm :
-	scp *.c $(UNIX4)
+	scp *.c $(UNIX4):~/cpe357/hw5
 
 handin : 
 	handin getaylor-grader 357hw5-11 Makefile *.c parseline.h README

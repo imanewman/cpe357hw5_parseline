@@ -197,8 +197,8 @@ void printStage(cmdFile *cf) {
 
 	printf("\n--------\nStage %d: \"", cf->stage);
 
-	for (i = 0; i < cf->argc; i++) 
-		printf("%s ", cf->args[i]);
+	for (i = 0; i < cf->startLen; i++) 
+		printf("%s ", cf->start[i]);
 
 	/*add printing in and out reroute if exists?*/
 

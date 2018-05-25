@@ -11,8 +11,9 @@ input *initInput(char *str) {
 
 	/*set a pointer to each word, while setting all spaces and \n to null*/
 	in->words[in->size++] = strtok(str, " \n");
+
 	while ((in->words[in->size++] = strtok(NULL, " \n"))) {
-		if (in->size == (MAX_CMD_PIPES * MAX_CMD_ARGS + 1) 
+		if (in->size == (MAX_CMD_PIPES * (MAX_CMD_ARGS + 3) + 1) 
 			&& in->words[in->size - 1] != NULL) {
 			/*perror("pipeline too deep or too many arguments\n");*/
 			break;
@@ -127,6 +128,16 @@ fileSet *makeFileSet(input *in) {
 
 	for (i = 0; i < in->size; i++) {
 		/*TODO: fill in each files data */
+		switch (in->words[i][0]) {
+			case '|':
+				break;
+			case '>':
+				break;
+			case '<':
+				break;
+			default:
+				break;
+		}
 	}
 
 	return fs;

@@ -25,7 +25,7 @@ typedef struct fileSet {
 } fileSet;
 
 typedef struct input {
-	char *words[MAX_CMD_PIPES * MAX_CMD_ARGS + 1];
+	char *words[MAX_CMD_PIPES * (MAX_CMD_ARGS + 3) + 1]; /*3 extra args for name, <, >*/
 	int size;
 } input;
 

@@ -150,6 +150,7 @@ fileSet *makeFileSet(input *in) {
 					cf->name = in->words[i];
 					cf->stage = curCmd;
 					cf->start = in->words + i;
+					fs->size++;
 				}
 				
 				cf->args[cf->argc++] = in->words[i];
@@ -186,9 +187,9 @@ void initCmdFile(cmdFile *cf) {
 /*prints the stages of the pipeline*/
 void printPipeline(fileSet *fs) {
 	int i;
-
+	
 	for (i = 0; i < fs->size; i++)
-		printStage(&(fs->files[i]));
+		printStage(fs->files + i);
 }
 
 /*prints one stage of the pipeline*/

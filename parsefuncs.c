@@ -130,10 +130,15 @@ fileSet *makeFileSet(input *in) {
 	for (i = 0; i < in->size; i++) {
 		switch (in->words[i][0]) {
 			case '|':
+				cf->outStage = curCmd + 1;
+				fs->files[curCmd + 1].inStage = curCmd;
+				cf = NULL;
 				break;
 			case '>':
+				cf->outName = in->words[++i];
 				break;
 			case '<':
+				cf->inName = in->words[++i];
 				break;
 			default:
 				if (!(cf)) { /*if file isnt initialized*/

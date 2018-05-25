@@ -196,10 +196,10 @@ void printPipeline(fileSet *fs) {
 void printStage(cmdFile *cf) {
 	int i;
 
-	printf("\n--------\nStage %d: \"", cf->stage);
+	printf("\n--------\nStage %d: \"%s", cf->stage, cf->start[0]);
 
-	for (i = 0; i < cf->startLen; i++) 
-		printf("%s ", cf->start[i]);
+	for (i = 1; i < cf->startLen; i++) 
+		printf(" %s", cf->start[i]);
 
 	/*add printing in and out reroute if exists?*/
 

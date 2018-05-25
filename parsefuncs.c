@@ -202,8 +202,6 @@ void printStage(cmdFile *cf) {
 	for (i = 1; i < cf->startLen; i++) 
 		printf(" %s", cf->start[i]);
 
-	/*add printing in and out reroute if exists?*/
-
 	printf("\"\n--------\n");
 
 	if (cf->inStage != -1)

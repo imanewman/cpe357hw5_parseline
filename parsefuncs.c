@@ -132,22 +132,28 @@ fileSet *makeFileSet(input *in) {
 			case '|':
 				cf->outStage = curCmd + 1;
 				fs->files[curCmd + 1].inStage = curCmd;
+
 				cf = NULL;
+				curCmd++;
 				break;
 			case '>':
 				cf->outName = in->words[++i];
+				cf->startLen += 2;
 				break;
 			case '<':
 				cf->inName = in->words[++i];
+				cf->startLen += 2;
 				break;
 			default:
 				if (!(cf)) { /*if file isnt initialized*/
 					cf = fs->files + curCmd;
 					cf->name = in->words[i];
 					cf->stage = curCmd;
+					cf->start = in->words + i;
 				}
 				
 				cf->args[cf->argc++] = in->words[i];
+				cf->startLen++;
 		}
 	}
 
@@ -162,6 +168,8 @@ void initCmdFile(cmdFile *cf) {
 
 	cf->name = NULL;
 	cf->stage = -1;
+	cf->start = NULL;
+	cf->startLen = 0;
 	cf->argc = 0;
 
 	for (i = 0; i < MAX_CMD_ARGS; i++)
